@@ -1,0 +1,120 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.fortegroup.KeywordBasedAutomation</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Forte Keyword Test Automation</name>
+    <version>2.0</version>
+    <vendor email="olex.dyachuk@fortegrp.com" url="http://www.fortegrp.com">ForteGRP</vendor>
+
+    <description>Forte Test Automation Plugin for keyword-based framework</description>
+
+    <change-notes>Forte Test Automation Plugin for keyword-based framework. Update for version 2023.2.3</change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="PROP File" implementationClass="proplang.PropFileType"
+                  fieldName="INSTANCE" language="PROP" extensions="prop"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.parserDefinition language="PROP"
+                               implementationClass="proplang.PropParserDefinition"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.syntaxHighlighterFactory language="PROP"
+                                       implementationClass="proplang.PropSyntaxHighlighterFactory"/>
+    </extensions>
+
+    <!--  <extensions defaultExtensionNs="com.intellij">-->
+    <!--    <completion.contributor language="PROP"-->
+    <!--                            implementationClass="proplang.PropCompletionContributor"/>-->
+    <!--  </extensions>-->
+
+    <!--  <extensions defaultExtensionNs="com.intellij">-->
+    <!--    <annotator language="PROP" implementationClass="proplang.PropAnnotator"/>-->
+    <!--  </extensions>-->
+
+    <!--  <extensions defaultExtensionNs="com.intellij">-->
+    <!--    <psi.referenceContributor implementation="proplang.CTReferenceContributor"/>-->
+    <!--  </extensions>-->
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="CT File" implementationClass="ctlang.CTFileType"
+                  fieldName="INSTANCE" language="CT" extensions="ct"/>
+    </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="Action CT File" implementationClass="ctlang.ACTFileType"
+                  fieldName="INSTANCE" language="CT" extensions="act"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.parserDefinition language="CT"
+                               implementationClass="ctlang.CTParserDefinition"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.syntaxHighlighterFactory language="CT"
+                                       implementationClass="ctlang.CTSyntaxHighlighterFactory"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <completion.contributor language="CT"
+                                implementationClass="ctlang.CTCompletionContributor"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <annotator language="CT" implementationClass="ctlang.CTAnnotator"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <psi.referenceContributor implementation="ctlang.CTReferenceContributor"/>
+    </extensions>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="CT Suite File" implementationClass="scriptslang.SCTFileType"
+                  fieldName="INSTANCE" language="SCT" extensions="sct"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.parserDefinition language="SCT"
+                               implementationClass="scriptslang.SCTParserDefinition"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.syntaxHighlighterFactory language="SCT"
+                                       implementationClass="scriptslang.SCTSyntaxHighlighterFactory"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <annotator language="SCT" implementationClass="scriptslang.SCTAnnotator"/>
+    </extensions>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <completion.contributor language="SCT"
+                                implementationClass="scriptslang.SCTCompletionContributor"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>
+
+<!--    &lt;!&ndash; Product and plugin compatibility requirements.-->
+<!--         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html &ndash;&gt;-->
+<!--    <depends>com.intellij.modules.platform</depends>-->
+
+<!--    &lt;!&ndash; Extension points defined by the plugin.-->
+<!--         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html &ndash;&gt;-->
+<!--    <extensions defaultExtensionNs="com.intellij">-->
+
+<!--    </extensions>-->
+<!--</idea-plugin>-->
