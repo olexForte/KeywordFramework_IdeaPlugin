@@ -75,7 +75,7 @@
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
-        <psi.referenceContributor implementation="ctlang.CTReferenceContributor" language="SCT"/>
+        <psi.referenceContributor implementation="sctlang.SCTReferenceContributor" language="SCT"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">

@@ -22,16 +22,16 @@ public class CTReferenceContributor extends PsiReferenceContributor {
     @Override
     public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar) {
 
-        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTCommandPart.class),
+        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTCommandPart.class).withLanguage(CTLanguage.INSTANCE),
                 new CTReferenceProvider());
 
 //        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTCommand.class).withLanguage(CTLanguage.INSTANCE),
 //                new CTReferenceProvider());
 
-        registrar.registerReferenceProvider(  psiElement(SCTScriptfile.class).withLanguage(SCTLanguage.INSTANCE),
-                 new STCReferenceProvider());
+//        registrar.registerReferenceProvider(  psiElement(SCTScriptfile.class).withLanguage(SCTLanguage.INSTANCE),
+//                 new STCReferenceProvider());
 
-        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTProperty.class),
+        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTProperty.class).withLanguage(CTLanguage.INSTANCE),
                 new PsiReferenceProvider() {
                     @NotNull
                     @Override
@@ -47,7 +47,7 @@ public class CTReferenceContributor extends PsiReferenceContributor {
                     }
                 });
 
-        registrar.registerReferenceProvider(PlatformPatterns.psiElement(PropProp.class),
+        registrar.registerReferenceProvider(PlatformPatterns.psiElement(PropProp.class).withLanguage(CTLanguage.INSTANCE),
                 new PsiReferenceProvider() {
                     @NotNull
                     @Override
@@ -64,7 +64,7 @@ public class CTReferenceContributor extends PsiReferenceContributor {
                     }
                 });
 
-        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTTag.class),
+        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTTag.class).withLanguage(CTLanguage.INSTANCE),
                 new PsiReferenceProvider() {
                     @NotNull
                     @Override
