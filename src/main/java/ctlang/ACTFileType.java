@@ -22,8 +22,14 @@ public class ACTFileType extends LanguageFileType {
 
     @NotNull
     @Override
+    public String getDisplayName() {
+        return "Action CT File";
+    }
+
+    @NotNull
+    @Override
     public String getDescription() {
-        return "CT language file";
+        return "Action CT language file";
     }
 
     @NotNull

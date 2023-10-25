@@ -21,7 +21,7 @@ public class CTCommandReference extends PsiReferenceBase<PsiElement> implements 
 
     @NotNull
     @Override
-    public ResolveResult[] multiResolve(boolean incompleteCode) {
+    public ResolveResult @NotNull [] multiResolve(boolean incompleteCode) {
         Project project = myElement.getProject();
         final List<PsiLiteralExpression> properties = CTUtil.findCommands(project, key);
         List<ResolveResult> results = new ArrayList<>();
@@ -46,7 +46,7 @@ public class CTCommandReference extends PsiReferenceBase<PsiElement> implements 
 
     @NotNull
     @Override
-    public Object[] getVariants() {
+    public Object @NotNull [] getVariants() {
         Project project = myElement.getProject();
         List<PsiLiteralExpression> commands = CTUtil.findCommands(project);
         List<LookupElement> variants = new ArrayList<>();

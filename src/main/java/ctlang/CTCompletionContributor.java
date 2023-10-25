@@ -15,6 +15,38 @@ import java.util.List;
 
 public class CTCompletionContributor extends CompletionContributor {
     public CTCompletionContributor() {
+        extend( CompletionType.BASIC,
+                PlatformPatterns.psiElement(CTTypes.COMMAND).withLanguage(CTLanguage.INSTANCE),
+                new CompletionProvider<CompletionParameters>() {
+                    public void addCompletions(@NotNull CompletionParameters parameters,
+                                               @NotNull ProcessingContext context,
+                                               @NotNull CompletionResultSet resultSet) {
+
+                        List<PsiLiteralExpression> all = CTUtil.findCommands(parameters.getPosition().getProject());
+                        for(PsiLiteralExpression item : all)
+                            resultSet.addElement(LookupElementBuilder.create(item));
+
+                        List<PsiFile> items = CTUtil.findActionFiles(parameters.getPosition().getProject());
+                        for(PsiFile item : items)
+                            resultSet.addElement(LookupElementBuilder.create(item));
+                    }
+                }
+        );
+
+        extend( CompletionType.BASIC,
+                PlatformPatterns.psiElement(CTTypes.TAG).withLanguage(CTLanguage.INSTANCE),
+                new CompletionProvider<CompletionParameters>() {
+                    public void addCompletions(@NotNull CompletionParameters parameters,
+                                               @NotNull ProcessingContext context,
+                                               @NotNull CompletionResultSet resultSet) {
+                        PsiElement key = parameters.getPosition();
+                        List<String> all = CTUtil.findTags(parameters.getPosition().getProject());
+                        for (String item : all)
+                            resultSet.addElement(LookupElementBuilder.create(item));
+
+                    }
+                }
+        );
 
         extend( CompletionType.BASIC,
                 PlatformPatterns.psiElement(CTTypes.PROPERTY).withLanguage(CTLanguage.INSTANCE),
@@ -75,37 +107,5 @@ public class CTCompletionContributor extends CompletionContributor {
 //    }
 //}
 //        );
-        extend( CompletionType.BASIC,
-                PlatformPatterns.psiElement(CTTypes.COMMAND_PART).withLanguage(CTLanguage.INSTANCE),
-                new CompletionProvider<CompletionParameters>() {
-                    public void addCompletions(@NotNull CompletionParameters parameters,
-                                               @NotNull ProcessingContext context,
-                                               @NotNull CompletionResultSet resultSet) {
-
-                            List<PsiLiteralExpression> all = CTUtil.findCommands(parameters.getPosition().getProject());
-                            for(PsiLiteralExpression item : all)
-                                resultSet.addElement(LookupElementBuilder.create(item));
-
-                            List<PsiFile> items = CTUtil.findActionFiles(parameters.getPosition().getProject());
-                            for(PsiFile item : items)
-                                resultSet.addElement(LookupElementBuilder.create(item));
-                    }
-                }
-        );
-
-        extend( CompletionType.BASIC,
-                PlatformPatterns.psiElement(CTTypes.TAG).withLanguage(CTLanguage.INSTANCE),
-                new CompletionProvider<CompletionParameters>() {
-                    public void addCompletions(@NotNull CompletionParameters parameters,
-                                               @NotNull ProcessingContext context,
-                                               @NotNull CompletionResultSet resultSet) {
-                        PsiElement key = parameters.getPosition();
-                        List<String> all = CTUtil.findTags(parameters.getPosition().getProject());
-                        for (String item : all)
-                            resultSet.addElement(LookupElementBuilder.create(item));
-
-                    }
-                }
-        );
     }
 }

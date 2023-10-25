@@ -4,12 +4,14 @@ import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
+
 import com.intellij.psi.impl.java.stubs.index.JavaStubIndexKeys;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndexImpl;
 import com.intellij.psi.util.PsiTreeUtil;
+import org.jetbrains.annotations.NotNull;
 import  proplang.PropFileType;
 import  proplang.psi.PropProp;
 import  proplang.psi.impl.PropPropImpl;
@@ -150,6 +152,16 @@ public class CTUtil {
                 }
             }
         }
+//        for(PsiAnnotation element : psiAnnotations) {
+//            // get PsiLiteralExpression
+//            for(PsiElement child :  element.getParent().getParent().getChildren()){
+//                if (child instanceof PsiLiteralExpression){
+//                    if(child.getText().toLowerCase().trim().contains(key.toLowerCase().trim()))
+//                        results.add((PsiLiteralExpression)child);
+//                    break;
+//                }
+//            }
+//        }
         return results;
     }
 

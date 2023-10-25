@@ -14,6 +14,7 @@
     <change-notes>Forte Test Automation Plugin for keyword-based framework. Update for version 2023.2.3</change-notes>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="PROP File" implementationClass="proplang.PropFileType"
@@ -63,43 +64,47 @@
                                        implementationClass="ctlang.CTSyntaxHighlighterFactory"/>
     </extensions>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <completion.contributor language="CT"
-                                implementationClass="ctlang.CTCompletionContributor"/>
-    </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
         <annotator language="CT" implementationClass="ctlang.CTAnnotator"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
-        <psi.referenceContributor implementation="ctlang.CTReferenceContributor"/>
+        <completion.contributor language="CT"
+                                implementationClass="ctlang.CTCompletionContributor"/>
     </extensions>
 
+    <extensions defaultExtensionNs="com.intellij">
+        <psi.referenceContributor implementation="ctlang.CTReferenceContributor" language="SCT"/>
+    </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileType name="CT Suite File" implementationClass="scriptslang.SCTFileType"
+        <psi.referenceContributor implementation="ctlang.CTReferenceContributor" language="CT"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="CT Suite File" implementationClass="sctlang.SCTFileType"
                   fieldName="INSTANCE" language="SCT" extensions="sct"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
         <lang.parserDefinition language="SCT"
-                               implementationClass="scriptslang.SCTParserDefinition"/>
+                               implementationClass="sctlang.SCTParserDefinition"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
         <lang.syntaxHighlighterFactory language="SCT"
-                                       implementationClass="scriptslang.SCTSyntaxHighlighterFactory"/>
+                                       implementationClass="sctlang.SCTSyntaxHighlighterFactory"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
-        <annotator language="SCT" implementationClass="scriptslang.SCTAnnotator"/>
+        <annotator language="SCT" implementationClass="sctlang.SCTAnnotator"/>
     </extensions>
 
 
     <extensions defaultExtensionNs="com.intellij">
         <completion.contributor language="SCT"
-                                implementationClass="scriptslang.SCTCompletionContributor"/>
+                                implementationClass="sctlang.SCTCompletionContributor"/>
     </extensions>
 
     <actions>

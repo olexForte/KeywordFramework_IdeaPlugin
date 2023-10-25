@@ -5,6 +5,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 
+import ctlang.CTSyntaxHighlighter;
 import  ctlang.psi.CTProperty;
 import  proplang.psi.PropProp;
 import org.jetbrains.annotations.NotNull;
@@ -47,20 +48,18 @@ public class PropAnnotator implements Annotator {
         List<CTProperty> properties = PropUtil.findProperties(project, possibleProperties, element.getContainingFile());
 
         // Set the annotations using the text ranges.
-        Annotation keyAnnotation = holder.createInfoAnnotation(keyRange, null);
-        keyAnnotation.setTextAttributes(DefaultLanguageHighlighterColors.KEYWORD);
-//        Annotation separatorAnnotation = holder.createInfoAnnotation(separatorRange, null);
-//        separatorAnnotation.setTextAttributes(CTSyntaxHighlighter.SEPARATOR);
+        holder.newAnnotation(HighlightSeverity.INFORMATION, "Found").range(keyRange).textAttributes(DefaultLanguageHighlighterColors.KEYWORD).create();
         if (properties.isEmpty()) {
             // No well-formed property found following the key-separator
-            Annotation badProperty = holder.createErrorAnnotation(keyRange, "File not found");
-            badProperty.setTextAttributes(PropSyntaxHighlighter.BAD_CHARACTER);
+            holder.newAnnotation(HighlightSeverity.WARNING, "File not found").range(keyRange).textAttributes(CTSyntaxHighlighter.BAD_CHARACTER).newFix(new PropCreatePropertyQuickFix(possibleProperties)).registerFix().create();
+
+            //Annotation badProperty = holder.createErrorAnnotation(keyRange, "File not found");
+            //badProperty.setTextAttributes(PropSyntaxHighlighter.BAD_CHARACTER);
             // ** Tutorial step 18.3 - Add a quick fix for the string containing possible properties
-            badProperty.registerFix(new PropCreatePropertyQuickFix(possibleProperties));
+            //badProperty.registerFix(new PropCreatePropertyQuickFix(possibleProperties));
         } else {
             // Found at least one property
-            Annotation annotation = holder.createInfoAnnotation(keyRange, null);
-            annotation.setTextAttributes(PropSyntaxHighlighter.VALUE);
+            holder.newAnnotation(HighlightSeverity.INFORMATION, "Found").range(keyRange).textAttributes(PropSyntaxHighlighter.VALUE).create();
         }
     }
 
