@@ -49,6 +49,21 @@ public class CTCompletionContributor extends CompletionContributor {
         );
 
         extend( CompletionType.BASIC,
+                PlatformPatterns.psiElement(CTTypes.TAGS).withLanguage(CTLanguage.INSTANCE),
+                new CompletionProvider<CompletionParameters>() {
+                    public void addCompletions(@NotNull CompletionParameters parameters,
+                                               @NotNull ProcessingContext context,
+                                               @NotNull CompletionResultSet resultSet) {
+                        PsiElement key = parameters.getPosition();
+                        List<String> all = CTUtil.findTags(parameters.getPosition().getProject());
+                        for (String item : all)
+                            resultSet.addElement(LookupElementBuilder.create(item));
+
+                    }
+                }
+        );
+
+        extend( CompletionType.BASIC,
                 PlatformPatterns.psiElement(CTTypes.PROPERTY).withLanguage(CTLanguage.INSTANCE),
                 new CompletionProvider<CompletionParameters>() {
                     public void addCompletions(@NotNull CompletionParameters parameters,

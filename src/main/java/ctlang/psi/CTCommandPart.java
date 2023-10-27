@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-//public interface CTCommandPart extends CTNamedElement {
-public interface CTCommandPart extends PsiElement {
+public interface CTCommandPart extends CTNamedElement {
+//public interface CTCommandPart extends PsiElement {
 
 }
