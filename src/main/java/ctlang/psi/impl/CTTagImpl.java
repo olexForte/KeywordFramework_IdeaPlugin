@@ -4,6 +4,8 @@ package ctlang.psi.impl;
 import java.util.List;
 
 import com.intellij.openapi.util.NlsSafe;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
@@ -53,5 +55,10 @@ public class CTTagImpl extends ASTWrapperPsiElement implements CTTag {
       getNode().replaceChild(keyNode, newKeyNode);
     }
     return this;
+  }
+
+  @Override
+  public PsiReference[] getReferences() {
+    return ReferenceProvidersRegistry.getInstance().getReferencesFromProviders(this);
   }
 }

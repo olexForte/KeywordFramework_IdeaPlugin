@@ -85,42 +85,42 @@ public class CTCompletionContributor extends CompletionContributor {
                 }
         );
 
-//        extend( CompletionType.BASIC,
-//                PlatformPatterns.psiElement(CTTypes.VALUE).withLanguage(CTLanguage.INSTANCE),
-//                new CompletionProvider<CompletionParameters>() {
-//                    public void addCompletions(@NotNull CompletionParameters parameters,
-//                                               @NotNull ProcessingContext context,
-//                                               @NotNull CompletionResultSet resultSet) {
-//                            PsiElement key = parameters.getPosition().getPrevSibling().getPrevSibling();
-//                            if(key.getText().toLowerCase().equals("random")){
-//                                resultSet.addElement(LookupElementBuilder.create("label:10c"));
-//                                resultSet.addElement(LookupElementBuilder.create("number:5d"));
-//                                resultSet.addElement(LookupElementBuilder.create("pass:10l"));
-//                                resultSet.addElement(LookupElementBuilder.create("curdate:CURRENT_DATE"));
-//                            } else {
-//                                List<PropProp> all = CTUtil.findPropertiesForKey(parameters.getPosition().getProject(), key);
-//                                for (PropProp item : all)
-//                                    resultSet.addElement(LookupElementBuilder.create(item));
-//                            }
-//
-//                    }
-//                }
-//        );
-//
-//        extend( CompletionType.BASIC,
-//                PlatformPatterns.psiElement(CTTypes.KEY).withLanguage(CTLanguage.INSTANCE),
-//                new CompletionProvider<CompletionParameters>() {
-//                    public void addCompletions(@NotNull CompletionParameters parameters,
-//                                               @NotNull ProcessingContext context,
-//                                               @NotNull CompletionResultSet resultSet) {
-//
-//        List<PsiFile> all = CTUtil.findPropertiesKeys(parameters.getPosition().getProject());
-//        for(PsiFile item : all)
-//            resultSet.addElement(LookupElementBuilder.create(item.getVirtualFile().getNameWithoutExtension()));
-//        resultSet.addElement(LookupElementBuilder.create("RANDOM"));
-//        resultSet.addElement(LookupElementBuilder.create("GENERAL"));
-//    }
-//}
-//        );
+        extend( CompletionType.BASIC,
+                PlatformPatterns.psiElement(CTTypes.VALUE).withLanguage(CTLanguage.INSTANCE),
+                new CompletionProvider<CompletionParameters>() {
+                    public void addCompletions(@NotNull CompletionParameters parameters,
+                                               @NotNull ProcessingContext context,
+                                               @NotNull CompletionResultSet resultSet) {
+                            PsiElement key = parameters.getPosition().getPrevSibling().getPrevSibling();
+                            if(key.getText().toLowerCase().equals("random")){
+                                resultSet.addElement(LookupElementBuilder.create("label:10c"));
+                                resultSet.addElement(LookupElementBuilder.create("number:5d"));
+                                resultSet.addElement(LookupElementBuilder.create("pass:10l"));
+                                resultSet.addElement(LookupElementBuilder.create("curdate:CURRENT_DATE"));
+                            } else {
+                                List<PropProp> all = CTUtil.findPropertiesForKey(parameters.getPosition().getProject(), key);
+                                for (PropProp item : all)
+                                    resultSet.addElement(LookupElementBuilder.create(item));
+                            }
+
+                    }
+                }
+        );
+
+        extend( CompletionType.BASIC,
+                PlatformPatterns.psiElement(CTTypes.KEY).withLanguage(CTLanguage.INSTANCE),
+                new CompletionProvider<CompletionParameters>() {
+                    public void addCompletions(@NotNull CompletionParameters parameters,
+                                               @NotNull ProcessingContext context,
+                                               @NotNull CompletionResultSet resultSet) {
+
+        List<PsiFile> all = CTUtil.findPropertiesKeys(parameters.getPosition().getProject());
+        for(PsiFile item : all)
+            resultSet.addElement(LookupElementBuilder.create(item.getVirtualFile().getNameWithoutExtension()));
+        resultSet.addElement(LookupElementBuilder.create("RANDOM"));
+        resultSet.addElement(LookupElementBuilder.create("GENERAL"));
+    }
+}
+        );
     }
 }

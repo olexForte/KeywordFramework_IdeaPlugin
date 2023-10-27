@@ -2,6 +2,9 @@
 package ctlang.psi.impl;
 
 import java.util.List;
+
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
@@ -51,4 +54,8 @@ public class CTPropertyImpl extends CTNamedElementImpl implements CTProperty {
     return CTPsiImplUtil.getNameIdentifier(this);
   }
 
+  @Override
+  public PsiReference[] getReferences() {
+    return ReferenceProvidersRegistry.getInstance().getReferencesFromProviders(this);
+  }
 }
