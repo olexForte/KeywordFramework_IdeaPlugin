@@ -54,8 +54,9 @@ public class CTPropertyImpl extends CTNamedElementImpl implements CTProperty {
     return CTPsiImplUtil.getNameIdentifier(this);
   }
 
+  //VERY IMPORTANT !!!!!!!!!
   @Override
-  public PsiReference[] getReferences() {
+  public PsiReference @NotNull [] getReferences() {
     return ReferenceProvidersRegistry.getInstance().getReferencesFromProviders(this);
   }
 }

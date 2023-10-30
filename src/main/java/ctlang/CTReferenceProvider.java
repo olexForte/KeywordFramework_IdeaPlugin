@@ -16,7 +16,14 @@ public class CTReferenceProvider extends PsiReferenceProvider {
                 String value = element.getText() != null ?
                     (String) element.getText() : null;
             if (value != null) {
-                TextRange range = new TextRange(0, value.length());
+                TextRange range;
+                if(element.getText().contains("Optional "))
+                    range = new TextRange(9, value.length());
+                else if(element.getText().contains("Final "))
+                    range = new TextRange(6, value.length());
+                else if(element.getText().contains("Initial "))
+                    range = new TextRange(8, value.length());
+                else range = new TextRange(0, value.length());
                 return new PsiReference[]{new CTCommandReference(element, range)};
             }
             return PsiReference.EMPTY_ARRAY;

@@ -22,8 +22,8 @@ public class CTReferenceContributor extends PsiReferenceContributor {
         registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTCommandPart.class).withLanguage(CTLanguage.INSTANCE),
                 new CTReferenceProvider());
 
-        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTTags.class).withLanguage(CTLanguage.INSTANCE),
-                new CTTagReferenceProvider());
+//        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTTags.class).withLanguage(CTLanguage.INSTANCE),
+//                new CTTagReferenceProvider());
 
         registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTTag.class).withLanguage(CTLanguage.INSTANCE),
                 new CTTagReferenceProvider());
