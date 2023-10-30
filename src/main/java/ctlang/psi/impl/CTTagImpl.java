@@ -57,6 +57,7 @@ public class CTTagImpl extends ASTWrapperPsiElement implements CTTag {
     return this;
   }
 
+  //Added manually as workaround
   @Override
   public PsiReference[] getReferences() {
     return ReferenceProvidersRegistry.getInstance().getReferencesFromProviders(this);

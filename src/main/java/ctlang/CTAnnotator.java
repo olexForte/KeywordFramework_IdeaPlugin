@@ -25,30 +25,22 @@ public class CTAnnotator implements Annotator {
         //if (!(element instanceof PsiLiteralExpression)) return;
 
         if (element instanceof CTTag) {
-            System.out.println("TAG - " + element.getText());
             processTag(element, holder);
             return;
         }
 
         if (element instanceof CTCommandPart) {
-            System.out.println("CommandPart - " + element.getText());
             processCommand(element, holder);
             return;
         }
 
         if ((element instanceof CTProperty)) {
-            System.out.println("Property - " + element.getText());
             processProperty(element, holder);
             return;
         }
 
-//        if (element.getNode().getElementType().toString().equals("CTTokenType.KEY")){
-//            processPropertyKey(element, holder);
-//            return;
-//        }
-
         if (element instanceof CTCommand){
-            System.out.println("Command - " + element.getText());
+            System.out.println("Command - " + element.getText()); //for debug
             return;
         }
 

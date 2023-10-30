@@ -12,12 +12,12 @@ public class STCReferenceProvider extends PsiReferenceProvider {
 
         @NotNull
         @Override
-        public PsiReference[] getReferencesByElement(@NotNull PsiElement element,
-                @NotNull ProcessingContext context) {
+        public PsiReference @NotNull [] getReferencesByElement(@NotNull PsiElement element,
+                                                               @NotNull ProcessingContext context) {
             SCTScriptfile literalExpression = (SCTScriptfile) element;
-            String value = literalExpression.getValue() instanceof String ?
+            String value = literalExpression.getValue() != null ?
                     (String) literalExpression.getValue() : null;
-            if ((value != null && value.startsWith(""))) {
+            if (value != null) {
                 TextRange property = new TextRange( 0,
                         value.length() );
                 return new PsiReference[]{new SCTReference(element, property)};

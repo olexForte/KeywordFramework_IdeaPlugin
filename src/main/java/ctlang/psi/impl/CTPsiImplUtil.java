@@ -26,15 +26,6 @@ public class CTPsiImplUtil {
         }
     }
 
-//    public static String getParameter(CTProperty element) {
-//        ASTNode valueNode = element.getNode().findChildByType(CTTypes.PARAMETER);
-//        if (valueNode != null) {
-//            return valueNode.getText();
-//        } else {
-//            return null;
-//        }
-//    }
-
     public static String getName(CTProperty element) {
         return getKey(element);
     }

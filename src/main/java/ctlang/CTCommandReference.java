@@ -32,6 +32,7 @@ public class CTCommandReference extends PsiReferenceBase<PsiElement> implements 
         for (PsiFile action : actions) {
             results.add(new PsiElementResolveResult(action));
         }
+        //for reference:
         //PsiAnnotationConstantValue l = (PsiAnnotationConstantValue)((PsiAnnotationImpl) property.getParent().getFirstChild().getFirstChild()).getAttributes().get(0).getAttributeValue();
         //l.getConstantValue()
         return results.toArray(new ResolveResult[results.size()]);

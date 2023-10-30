@@ -34,15 +34,7 @@ public class CTCommandPartImpl extends ASTWrapperPsiElement implements CTCommand
     else super.accept(visitor);
   }
 
-//  @Override
-//  public @Nullable PsiElement getNameIdentifier() {
-//    return null;
-//  }
-//
-//  @Override
-//  public PsiElement setName(@NlsSafe @NotNull String name) throws IncorrectOperationException {
-//    return null;
-//  }
+  //Added manually as workaround
 @Override
 public PsiReference[] getReferences() {
   return ReferenceProvidersRegistry.getInstance().getReferencesFromProviders(this);
