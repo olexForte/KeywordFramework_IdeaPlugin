@@ -18,14 +18,14 @@
     <depends>com.intellij.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileType name="PROP File"      implementationClass="proplang.PropFileType" fieldName="INSTANCE" language="PROP" extensions="prop"/>
+        <lang.parserDefinition language="CT" implementationClass="ctlang.CTParserDefinition"/>
+        <lang.parserDefinition language="SCT" implementationClass="sctlang.SCTParserDefinition"/>
+        <lang.parserDefinition language="PROP" implementationClass="proplang.PropParserDefinition"/>
+
         <fileType name="CT File"        implementationClass="ctlang.CTFileType"     fieldName="INSTANCE" language="CT" extensions="ct"/>
         <fileType name="Action CT File" implementationClass="ctlang.ACTFileType"    fieldName="INSTANCE" language="CT" extensions="act"/>
         <fileType name="CT Suite File"  implementationClass="sctlang.SCTFileType"   fieldName="INSTANCE" language="SCT" extensions="sct"/>
-
-        <lang.parserDefinition language="PROP" implementationClass="proplang.PropParserDefinition"/>
-        <lang.parserDefinition language="CT" implementationClass="ctlang.CTParserDefinition"/>
-        <lang.parserDefinition language="SCT" implementationClass="sctlang.SCTParserDefinition"/>
+        <fileType name="PROP File"      implementationClass="proplang.PropFileType" fieldName="INSTANCE" language="PROP" extensions="prop"/>
 
         <lang.syntaxHighlighterFactory language="SCT" implementationClass="sctlang.SCTSyntaxHighlighterFactory"/>
         <lang.syntaxHighlighterFactory language="PROP" implementationClass="proplang.PropSyntaxHighlighterFactory"/>
