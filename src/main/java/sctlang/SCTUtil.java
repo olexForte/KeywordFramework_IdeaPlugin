@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class SCTUtil {
-
     public static List<PsiFile> findStoryFiles(Project project, String key) {
         List<PsiFile> result = new ArrayList<>();
 
@@ -57,6 +56,7 @@ public class SCTUtil {
         List<String> result = new ArrayList<>();
         Collection<VirtualFile> virtualFiles =
                 FileTypeIndex.getFiles(CTFileType.INSTANCE, GlobalSearchScope.allScope(project));
+        //for reference:
 //        for (VirtualFile virtualFile : virtualFiles) {
 //            CTFile ctFile = (CTFile) PsiManager.getInstance(project).findFile(virtualFile);
 //            if (ctFile != null) {
@@ -67,6 +67,7 @@ public class SCTUtil {
 //            }
 //        }
         for (VirtualFile virtualFile : virtualFiles) {
+            //for reference:
 //            CTFile ctFile = (CTFile) PsiManager.getInstance(project).findFile(virtualFile);
 //            if (ctFile != null) {
 //                SCTScriptfile[] properties = PsiTreeUtil.getChildrenOfType(ctFile, SCTScriptfile.class);

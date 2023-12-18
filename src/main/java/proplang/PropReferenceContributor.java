@@ -23,9 +23,9 @@ public class PropReferenceContributor extends PsiReferenceContributor {
                         String value = literalExpression.getValue() instanceof String ?
                                 (String) literalExpression.getValue() : null;
                         if ((value != null && value.startsWith(CT_PREFIX_STR + CT_SEPARATOR_STR))) {
-                            TextRange property = new TextRange(CT_PREFIX_STR.length() + CT_SEPARATOR_STR.length() + 1,
+                            TextRange textRange = new TextRange(CT_PREFIX_STR.length() + CT_SEPARATOR_STR.length() + 1,
                                     value.length() + 1);
-                            return new PsiReference[]{new PropReference(element, property)};
+                            return new PsiReference[]{new PropReference(element, textRange)};
                         }
                         return PsiReference.EMPTY_ARRAY;
                     }

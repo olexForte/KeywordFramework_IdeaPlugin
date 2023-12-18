@@ -9,6 +9,7 @@ import com.intellij.util.ProcessingContext;
 import  proplang.psi.PropTypes;
 import org.jetbrains.annotations.NotNull;
 
+//TODO: UNDER CONSTRUCTION
 public class PropCompletionContributor extends CompletionContributor {
     public PropCompletionContributor() {
         extend( CompletionType.BASIC,

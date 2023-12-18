@@ -29,36 +29,24 @@ public class CTTagImpl extends ASTWrapperPsiElement implements CTTag {
     visitor.visitTag(this);
   }
 
-  @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof CTVisitor) accept((CTVisitor)visitor);
     else super.accept(visitor);
   }
 
-  @Override
-  public @Nullable PsiElement getNameIdentifier() {
-    ASTNode keyNode = getNode().findChildByType(PropTypes.KEY);
-    if (keyNode != null) {
-      return keyNode.getPsi();
-    } else {
-      return null;
-    }
-  }
-
-  @Override
-  public PsiElement setName(@NlsSafe @NotNull String name) throws IncorrectOperationException {
-    ASTNode keyNode = getNode().findChildByType(PropTypes.KEY);
-    if (keyNode != null) {
-
-      PropProp property = PropElementFactory.createProperty(getProject(), name);
-      ASTNode newKeyNode = property.getFirstChild().getNode();
-      getNode().replaceChild(keyNode, newKeyNode);
-    }
-    return this;
-  }
+//  @Override
+//  public void subtreeChanged() {
+//    super.subtreeChanged();
+//  }
 
   @Override
   public PsiReference[] getReferences() {
-    return ReferenceProvidersRegistry.getInstance().getReferencesFromProviders(this);
+    return ReferenceProvidersRegistry.getReferencesFromProviders(this);
+  }
+
+  @Override
+  public PsiReference getReference() {
+    PsiReference[] references = getReferences();
+    return references.length == 0 ? null : references[0];
   }
 }

@@ -7,105 +7,53 @@
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
     <name>Forte Keyword Test Automation</name>
     <version>2.0</version>
+
     <vendor email="olex.dyachuk@fortegrp.com" url="http://www.fortegrp.com">ForteGRP</vendor>
 
-    <description>Forte Test Automation Plugin for keyword-based framework</description>
+    <description>Forte Test Automation Plugin for keyword-based framework.  Based on: https://plugins.jetbrains.com/docs/intellij/custom-language-support-tutorial.html</description>
 
-    <change-notes>Forte Test Automation Plugin for keyword-based framework. Update for version 2023.2.3</change-notes>
+    <change-notes>Forte Test Automation Plugin for keyword-based framework. Update for version 2023.2.3. </change-notes>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileType name="PROP File" implementationClass="proplang.PropFileType"
-                  fieldName="INSTANCE" language="PROP" extensions="prop"/>
+        <lang.parserDefinition language="CT" implementationClass="ctlang.CTParserDefinition"/>
+        <lang.parserDefinition language="SCT" implementationClass="sctlang.SCTParserDefinition"/>
+        <lang.parserDefinition language="PROP" implementationClass="proplang.PropParserDefinition"/>
+
+        <fileType name="CT File"        implementationClass="ctlang.CTFileType"     fieldName="INSTANCE" language="CT" extensions="ct"/>
+        <fileType name="Action CT File" implementationClass="ctlang.ACTFileType"    fieldName="INSTANCE" language="CT" extensions="act"/>
+        <fileType name="CT Suite File"  implementationClass="sctlang.SCTFileType"   fieldName="INSTANCE" language="SCT" extensions="sct"/>
+        <fileType name="PROP File"      implementationClass="proplang.PropFileType" fieldName="INSTANCE" language="PROP" extensions="prop"/>
+
+        <lang.syntaxHighlighterFactory language="SCT" implementationClass="sctlang.SCTSyntaxHighlighterFactory"/>
+        <lang.syntaxHighlighterFactory language="PROP" implementationClass="proplang.PropSyntaxHighlighterFactory"/>
+        <lang.syntaxHighlighterFactory language="CT" implementationClass="ctlang.CTSyntaxHighlighterFactory"/>
+
+        <annotator language="CT" implementationClass="ctlang.CTAnnotator"/>
+        <annotator language="SCT" implementationClass="sctlang.SCTAnnotator"/>
+
+        <completion.contributor language="SCT" implementationClass="sctlang.SCTCompletionContributor"/>
+        <completion.contributor language="CT" implementationClass="ctlang.CTCompletionContributor"/>
+
+        <psi.referenceContributor implementation="sctlang.SCTReferenceContributor" language="SCT"/>
+        <psi.referenceContributor implementation="ctlang.CTReferenceContributor" language="CT"/>
     </extensions>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <lang.parserDefinition language="PROP"
-                               implementationClass="proplang.PropParserDefinition"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <lang.syntaxHighlighterFactory language="PROP"
-                                       implementationClass="proplang.PropSyntaxHighlighterFactory"/>
-    </extensions>
-
-    <!--  <extensions defaultExtensionNs="com.intellij">-->
+<!-- TODO add properties advanced support-->
+    <!--  -->
     <!--    <completion.contributor language="PROP"-->
     <!--                            implementationClass="proplang.PropCompletionContributor"/>-->
     <!--  </extensions>-->
 
-    <!--  <extensions defaultExtensionNs="com.intellij">-->
+    <!--  -->
     <!--    <annotator language="PROP" implementationClass="proplang.PropAnnotator"/>-->
     <!--  </extensions>-->
 
-    <!--  <extensions defaultExtensionNs="com.intellij">-->
+    <!--  -->
     <!--    <psi.referenceContributor implementation="proplang.CTReferenceContributor"/>-->
     <!--  </extensions>-->
-
-
-    <extensions defaultExtensionNs="com.intellij">
-        <fileType name="CT File" implementationClass="ctlang.CTFileType"
-                  fieldName="INSTANCE" language="CT" extensions="ct"/>
-    </extensions>
-    <extensions defaultExtensionNs="com.intellij">
-        <fileType name="Action CT File" implementationClass="ctlang.ACTFileType"
-                  fieldName="INSTANCE" language="CT" extensions="act"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <lang.parserDefinition language="CT"
-                               implementationClass="ctlang.CTParserDefinition"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <lang.syntaxHighlighterFactory language="CT"
-                                       implementationClass="ctlang.CTSyntaxHighlighterFactory"/>
-    </extensions>
-
-
-    <extensions defaultExtensionNs="com.intellij">
-        <annotator language="CT" implementationClass="ctlang.CTAnnotator"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <completion.contributor language="CT"
-                                implementationClass="ctlang.CTCompletionContributor"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <psi.referenceContributor implementation="sctlang.SCTReferenceContributor" language="SCT"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <psi.referenceContributor implementation="ctlang.CTReferenceContributor" language="CT"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <fileType name="CT Suite File" implementationClass="sctlang.SCTFileType"
-                  fieldName="INSTANCE" language="SCT" extensions="sct"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <lang.parserDefinition language="SCT"
-                               implementationClass="sctlang.SCTParserDefinition"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <lang.syntaxHighlighterFactory language="SCT"
-                                       implementationClass="sctlang.SCTSyntaxHighlighterFactory"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <annotator language="SCT" implementationClass="sctlang.SCTAnnotator"/>
-    </extensions>
-
-
-    <extensions defaultExtensionNs="com.intellij">
-        <completion.contributor language="SCT"
-                                implementationClass="sctlang.SCTCompletionContributor"/>
-    </extensions>
 
     <actions>
         <!-- Add your actions here -->

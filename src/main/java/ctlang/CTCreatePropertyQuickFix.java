@@ -25,6 +25,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
+//TODO: UNDER CONSTRUCTION
+// for reference from online guide
 public class CTCreatePropertyQuickFix extends BaseIntentionAction {
     private final String key;
 

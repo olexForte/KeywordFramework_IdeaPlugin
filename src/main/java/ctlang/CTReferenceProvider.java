@@ -28,20 +28,4 @@ public class CTReferenceProvider extends PsiReferenceProvider {
             }
             return PsiReference.EMPTY_ARRAY;
         }
-
-
-//        @NotNull
-//        @Override
-//        public PsiReference[] getReferencesByElement(@NotNull PsiElement element,
-//                @NotNull ProcessingContext context) {
-//            SCTScriptfile literalExpression = (SCTScriptfile) element;
-//            String value = literalExpression.getValue() instanceof String ?
-//                    (String) literalExpression.getValue() : null;
-//            if ((value != null && value.startsWith(""))) {
-//                TextRange property = new TextRange( 0,
-//                        value.length() );
-//                return new PsiReference[]{new SCTReference(element, property)};
-//            }
-//            return PsiReference.EMPTY_ARRAY;
-//        }
 }

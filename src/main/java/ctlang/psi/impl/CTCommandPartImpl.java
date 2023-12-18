@@ -34,15 +34,7 @@ public class CTCommandPartImpl extends ASTWrapperPsiElement implements CTCommand
     else super.accept(visitor);
   }
 
-//  @Override
-//  public @Nullable PsiElement getNameIdentifier() {
-//    return null;
-//  }
-//
-//  @Override
-//  public PsiElement setName(@NlsSafe @NotNull String name) throws IncorrectOperationException {
-//    return null;
-//  }
+  //Added manually as workaround
 @Override
 public PsiReference[] getReferences() {
   return ReferenceProvidersRegistry.getInstance().getReferencesFromProviders(this);
@@ -50,7 +42,7 @@ public PsiReference[] getReferences() {
 
   @Override
   public @Nullable PsiElement getNameIdentifier() {
-    System.out.println(getNode().findChildByType(CTTypes.KEY) + " " + getNode().findChildByType(CTTypes.VALUE) + getNode().findChildByType(CTTypes.COMMENT) + getNode().findChildByType(CTTypes.COMMAND_PART) + getNode().findChildByType(CTTypes.COMMAND));
+    //System.out.println(getNode().findChildByType(CTTypes.KEY) + " " + getNode().findChildByType(CTTypes.VALUE) + getNode().findChildByType(CTTypes.COMMENT) + getNode().findChildByType(CTTypes.COMMAND_PART) + getNode().findChildByType(CTTypes.COMMAND));
     ASTNode keyNode = getNode().findChildByType(CTTypes.KEY);
     if (keyNode != null) {
       return keyNode.getPsi();

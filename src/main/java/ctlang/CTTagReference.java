@@ -20,24 +20,24 @@ public class CTTagReference extends PsiReferenceBase<PsiElement> implements PsiP
 
     public CTTagReference(@NotNull PsiElement element, TextRange textRange) {
         super(element, textRange);
-        key = element.getText().substring(textRange.getStartOffset(), textRange.getEndOffset()).replace(",","").trim();
+        //super(element, (element.getText().contains(":") ? textRange.grown(-1) : textRange));
+        key = element.getText();
     }
 
     @NotNull
     @Override
-    public ResolveResult[] multiResolve(boolean incompleteCode) {
+    public ResolveResult @NotNull [] multiResolve(boolean incompleteCode) {
         Project project = myElement.getProject();
         List<ResolveResult> results = new ArrayList<>();
 
-        final List<PsiFile> actions= new ArrayList();
-        Collection<VirtualFile> virtualFiles =
-                FilenameIndex.getVirtualFilesByName(    project,    CTLanguage.TAGS_FILE,    false,    GlobalSearchScope.allScope(project));
+        Collection<VirtualFile> virtualFiles =  FilenameIndex.getVirtualFilesByName( CTLanguage.TAGS_FILE,    false,    GlobalSearchScope.allScope(project));
+//                FilenameIndex.getVirtualFilesByName(    project,    CTLanguage.TAGS_FILE,    false,    GlobalSearchScope.allScope(project));
        //virtualFiles.stream().map(f -> PsiManager.getInstance(project).findFile(f)).map(f -> results.add(new PsiElementResolveResult(f)));
         //PsiAnnotationConstantValue l = (PsiAnnotationConstantValue)((PsiAnnotationImpl) property.getParent().getFirstChild().getFirstChild()).getAttributes().get(0).getAttributeValue();
         //l.getConstantValue()
-        results.add(new PsiElementResolveResult(virtualFiles.stream().map(f -> PsiManager.getInstance(project).findFile(f)).toArray(size -> new PsiFile[size])[0]));
+        results.add(new PsiElementResolveResult(virtualFiles.stream().map(f -> PsiManager.getInstance(project).findFile(f)).toArray(PsiFile[]::new)[0]));
 
-        return results.toArray(new ResolveResult[results.size()]);
+        return results.toArray(new ResolveResult[0]);
     }
 
     @Nullable

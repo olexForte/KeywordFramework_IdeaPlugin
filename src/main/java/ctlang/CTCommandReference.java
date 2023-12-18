@@ -23,15 +23,16 @@ public class CTCommandReference extends PsiReferenceBase<PsiElement> implements 
     @Override
     public ResolveResult @NotNull [] multiResolve(boolean incompleteCode) {
         Project project = myElement.getProject();
-        final List<PsiLiteralExpression> properties = CTUtil.findCommands(project, key);
+        final List<PsiLiteralExpression> commands = CTUtil.findCommands(project, key);
         List<ResolveResult> results = new ArrayList<>();
-        for (PsiLiteralExpression property : properties) {
-            results.add(new PsiElementResolveResult(property));
+        for (PsiLiteralExpression command : commands) {
+            results.add(new PsiElementResolveResult(command));
         }
         final List<PsiFile> actions = CTUtil.findActionFiles(project, key.trim().replace(" ", "_"));
         for (PsiFile action : actions) {
             results.add(new PsiElementResolveResult(action));
         }
+        //for reference:
         //PsiAnnotationConstantValue l = (PsiAnnotationConstantValue)((PsiAnnotationImpl) property.getParent().getFirstChild().getFirstChild()).getAttributes().get(0).getAttributeValue();
         //l.getConstantValue()
         return results.toArray(new ResolveResult[results.size()]);

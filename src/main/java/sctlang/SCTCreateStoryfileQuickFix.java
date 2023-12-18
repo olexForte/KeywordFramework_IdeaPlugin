@@ -56,20 +56,20 @@ public class SCTCreateStoryfileQuickFix extends BaseIntentionAction {
             Collection<VirtualFile> virtualFiles =
                     FileTypeIndex.getFiles(SCTFileType.INSTANCE, GlobalSearchScope.allScope(project) );
             if (virtualFiles.size() == 1) {
-                createProperty(project, virtualFiles.iterator().next());
+                createStoryfile(project, virtualFiles.iterator().next());
             } else {
                 final FileChooserDescriptor descriptor =
                         FileChooserDescriptorFactory.createSingleFileDescriptor(SCTFileType.INSTANCE);
                 descriptor.setRoots(ProjectUtil.guessProjectDir(project));
                 final VirtualFile file1 = FileChooser.chooseFile(descriptor, project, null);
                 if (file1 != null) {
-                    createProperty(project, file1);
+                    createStoryfile(project, file1);
                 }
             }
         });
     }
 
-    private void createProperty(final Project project, final VirtualFile file) {
+    private void createStoryfile(final Project project, final VirtualFile file) {
         WriteCommandAction.writeCommandAction(project).run(() -> {
             SCTFile ctFile = (SCTFile) PsiManager.getInstance(project).findFile(file);
             ASTNode lastChildNode = ctFile.getNode().getLastChildNode();
@@ -78,7 +78,7 @@ public class SCTCreateStoryfileQuickFix extends BaseIntentionAction {
                 ctFile.getNode().addChild(SCTElementFactory.createCRLF(project).getNode());
             }
             // IMPORTANT: change spaces to escaped spaces or the new node will only have the first word for the key
-            SCTScriptfile property = SCTElementFactory.createProperty(project, key.replaceAll(" ", "\\\\ "), "");
+            SCTScriptfile property = SCTElementFactory.createScriptfile(project, key.replaceAll(" ", "\\\\ "), "");
             ctFile.getNode().addChild(property.getNode());
             ((Navigatable) property.getLastChild().getNavigationElement()).navigate(true);
             FileEditorManager.getInstance(project).getSelectedTextEditor().getCaretModel().moveCaretRelatively(2, 0, false, false, false);

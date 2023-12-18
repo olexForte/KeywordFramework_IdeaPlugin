@@ -25,30 +25,22 @@ public class CTAnnotator implements Annotator {
         //if (!(element instanceof PsiLiteralExpression)) return;
 
         if (element instanceof CTTag) {
-            System.out.println("TAG - " + element.getText());
             processTag(element, holder);
             return;
         }
 
         if (element instanceof CTCommandPart) {
-            System.out.println("CommandPart - " + element.getText());
             processCommand(element, holder);
             return;
         }
 
         if ((element instanceof CTProperty)) {
-            System.out.println("Property - " + element.getText());
             processProperty(element, holder);
             return;
         }
 
-//        if (element.getNode().getElementType().toString().equals("CTTokenType.KEY")){
-//            processPropertyKey(element, holder);
-//            return;
-//        }
-
         if (element instanceof CTCommand){
-            System.out.println("Command - " + element.getText());
+            //System.out.println("Command - " + element.getText()); //for debug
             return;
         }
 
@@ -90,10 +82,10 @@ public class CTAnnotator implements Annotator {
         if ((value == null)) return;
         TextRange keyRange = new TextRange(element.getTextRange().getStartOffset(), element.getTextRange().getEndOffset());
 
-        String possibleProperties = value.trim();
+        String valuePart = value.trim();
         Project project = element.getProject();
-        List<PsiLiteralExpression> commands =  CTUtil.findCommands(project, possibleProperties);
-        List<PsiFile> commandsFromFiles = CTUtil.findActionFiles(project, possibleProperties.replace(" ", "_"));
+        List<PsiLiteralExpression> commands =  CTUtil.findCommands(project, valuePart);
+        List<PsiFile> commandsFromFiles = CTUtil.findActionFiles(project, valuePart.replace(" ", "_"));
 
         if (commands.isEmpty() && commandsFromFiles.isEmpty()) {
             // No well-formed property found following the key-separator
@@ -110,9 +102,9 @@ public class CTAnnotator implements Annotator {
         if ((value == null)) return;
         TextRange keyRange = new TextRange(element.getTextRange().getStartOffset(), element.getTextRange().getEndOffset());
 
-        String possibleProperties = value.trim();
+        String valuePart = value.trim();
         Project project = element.getProject();
-        List<String> tags =  CTUtil.findTags(project, possibleProperties);
+        List<String> tags =  CTUtil.findTags(project, valuePart);
 
         if (tags.isEmpty()) {
             // No well-formed property found following the key-separator
