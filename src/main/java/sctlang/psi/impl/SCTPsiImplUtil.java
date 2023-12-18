@@ -8,7 +8,6 @@ import  sctlang.psi.SCTTypes;
 
 public class SCTPsiImplUtil {
 
-
     public static String getValue(SCTScriptfile element) {
         ASTNode valueNode = element.getNode().findChildByType(SCTTypes.VALUE);
         if (valueNode != null) {
@@ -18,7 +17,6 @@ public class SCTPsiImplUtil {
         }
     }
 
-
     public static String getName(SCTScriptfile element) {
         return getValue(element);
     }
@@ -27,8 +25,8 @@ public class SCTPsiImplUtil {
         ASTNode keyNode = element.getNode().findChildByType(SCTTypes.VALUE);
         if (keyNode != null) {
 
-            SCTScriptfile property = SCTElementFactory.createProperty(element.getProject(), newName);
-            ASTNode newKeyNode = property.getFirstChild().getNode();
+            SCTScriptfile scriptfile = SCTElementFactory.createScriptfile(element.getProject(), newName);
+            ASTNode newKeyNode = scriptfile.getFirstChild().getNode();
             element.getNode().replaceChild(keyNode, newKeyNode);
         }
         return element;
@@ -42,6 +40,4 @@ public class SCTPsiImplUtil {
             return null;
         }
     }
-
-
 }

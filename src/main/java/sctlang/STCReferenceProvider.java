@@ -18,9 +18,9 @@ public class STCReferenceProvider extends PsiReferenceProvider {
             String value = literalExpression.getValue() != null ?
                     (String) literalExpression.getValue() : null;
             if (value != null) {
-                TextRange property = new TextRange( 0,
+                TextRange textRange = new TextRange( 0,
                         value.length() );
-                return new PsiReference[]{new SCTReference(element, property)};
+                return new PsiReference[]{new SCTReference(element, textRange)};
             }
             return PsiReference.EMPTY_ARRAY;
         }

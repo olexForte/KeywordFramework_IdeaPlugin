@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface CTTag extends CTNamedElement {
-//public interface CTTag extends PsiElement {
+//public interface CTTag extends CTNamedElement {
+public interface CTTag extends PsiElement {
 
 }

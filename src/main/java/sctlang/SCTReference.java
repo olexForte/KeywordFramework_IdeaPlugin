@@ -24,10 +24,10 @@ public class SCTReference extends PsiReferenceBase<PsiElement> implements PsiPol
     @Override
     public ResolveResult @NotNull [] multiResolve(boolean incompleteCode) {
         Project project = myElement.getProject();
-        final List<PsiFile> properties = SCTUtil.findStoryFiles(project, key);
+        final List<PsiFile> storyFiles = SCTUtil.findStoryFiles(project, key);
         List<ResolveResult> results = new ArrayList<>();
-        for (PsiFile property : properties) {
-            results.add(new PsiElementResolveResult(property)); //TODO
+        for (PsiFile storyFile : storyFiles) {
+            results.add(new PsiElementResolveResult(storyFile)); //TODO
         }
         return results.toArray(new ResolveResult[results.size()]);
     }
@@ -43,13 +43,13 @@ public class SCTReference extends PsiReferenceBase<PsiElement> implements PsiPol
     @Override
     public Object[] getVariants() {
         Project project = myElement.getProject();
-        List<String> properties = SCTUtil.findStories(project);
+        List<String> storyFiles = SCTUtil.findStories(project);
         List<LookupElement> variants = new ArrayList<>();
-        for (final String property : properties) {
-            if (property != null && property.length() > 0) {
+        for (final String storyFile : storyFiles) {
+            if (storyFile != null && storyFile.length() > 0) {
                 variants.add(LookupElementBuilder
-                        .create(property).withIcon(SCTIcons.FILE)
-                        .withTypeText(property)
+                        .create(storyFile).withIcon(SCTIcons.FILE)
+                        .withTypeText(storyFile)
                 );
             }
         }

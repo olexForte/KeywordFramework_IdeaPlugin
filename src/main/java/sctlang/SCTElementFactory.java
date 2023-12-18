@@ -8,12 +8,12 @@ import  sctlang.psi.SCTScriptfile;
 
 
 public class SCTElementFactory {
-    public static SCTScriptfile createProperty(Project project, String name) {
+    public static SCTScriptfile createScriptfile(Project project, String name) {
         final SCTFile file = createFile(project, name);
         return (SCTScriptfile) file.getFirstChild();
     }
 
-    public static SCTScriptfile createProperty(Project project, String name, String value) {
+    public static SCTScriptfile createScriptfile(Project project, String name, String value) {
         final SCTFile file = createFile(project, name + " = " + value);
         return (SCTScriptfile) file.getFirstChild();
     }

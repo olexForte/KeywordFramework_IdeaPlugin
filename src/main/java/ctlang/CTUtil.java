@@ -135,8 +135,6 @@ public class CTUtil {
     }
 
 
-
-
     // Searches the entire project for CT language files with instances of the CT property with the given key
     public static List<PsiLiteralExpression> findCommands(Project project, String key) {
 
@@ -180,7 +178,7 @@ public class CTUtil {
         return results;
     }
 
-    public static List<String> findTags(Project project, String possibleProperties) {
+    public static List<String> findTags(Project project, String valuePart) {
         ArrayList<String> results = new ArrayList<>();
         Collection<VirtualFile> virtualFiles =
                 FilenameIndex.getVirtualFilesByName(    project,    CTLanguage.TAGS_FILE,    false,    GlobalSearchScope.allScope(project));
@@ -189,7 +187,7 @@ public class CTUtil {
                PsiFile ctFile = PsiManager.getInstance(project).findFile(virtualFile);
 
                for(String line : ctFile.getText().split("\n")){
-                   if(possibleProperties.toLowerCase().equals(line.toLowerCase()))
+                   if(valuePart.toLowerCase().equals(line.toLowerCase()))
                        results.add(line.toLowerCase());
                }
             }

@@ -22,18 +22,6 @@ public class CTReferenceContributor extends PsiReferenceContributor {
         registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTCommandPart.class).withLanguage(CTLanguage.INSTANCE),
                 new CTReferenceProvider());
 
-//        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTTags.class).withLanguage(CTLanguage.INSTANCE),
-//                new CTTagReferenceProvider());
-
-        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTTag.class).withLanguage(CTLanguage.INSTANCE),
-                new CTTagReferenceProvider());
-
-//        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTCommand.class).withLanguage(CTLanguage.INSTANCE),
-//                new CTReferenceProvider());
-
-//        registrar.registerReferenceProvider(  psiElement(SCTScriptfile.class).withLanguage(SCTLanguage.INSTANCE),
-//                 new STCReferenceProvider());
-
         registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTProperty.class).withLanguage(CTLanguage.INSTANCE),
                 new PsiReferenceProvider() {
                     @NotNull
@@ -49,6 +37,20 @@ public class CTReferenceContributor extends PsiReferenceContributor {
                         return PsiReference.EMPTY_ARRAY;
                     }
                 });
+
+        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTTag.class).withLanguage(CTLanguage.INSTANCE),
+                new CTTagReferenceProvider());
+
+//TODO for future review
+
+//        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTTags.class).withLanguage(CTLanguage.INSTANCE),
+//                new CTTagReferenceProvider());
+
+//        registrar.registerReferenceProvider(PlatformPatterns.psiElement(CTCommand.class).withLanguage(CTLanguage.INSTANCE),
+//                new CTReferenceProvider());
+
+//        registrar.registerReferenceProvider(  psiElement(SCTScriptfile.class).withLanguage(SCTLanguage.INSTANCE),
+//                 new STCReferenceProvider());
 
 //        registrar.registerReferenceProvider(PlatformPatterns.psiElement(PropProp.class).withLanguage(CTLanguage.INSTANCE),
 //                new PsiReferenceProvider() {

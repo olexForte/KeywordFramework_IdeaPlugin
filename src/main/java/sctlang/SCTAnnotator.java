@@ -31,20 +31,17 @@ public class SCTAnnotator implements Annotator {
 
         }
         // Get the list of properties from the Project
-        String possibleProperties = value;//.substring(CT_PREFIX_STR.length() + CT_SEPARATOR_STR.length());
+        String valuePart = value;//.substring(CT_PREFIX_STR.length() + CT_SEPARATOR_STR.length());
         Project project = element.getProject();
-        List<String> properties = SCTUtil.findStories(project, possibleProperties);
+        List<String> storyFiles = SCTUtil.findStories(project, valuePart);
 
-        // Set the annotations using the text ranges.
-        holder.newAnnotation(HighlightSeverity.INFORMATION, "Found").range(keyRange).textAttributes(DefaultLanguageHighlighterColors.KEYWORD).create();
-
-        if (properties.isEmpty()) {
+        if (storyFiles.isEmpty()) {
             // No well-formed property found following the key-separator
-            holder.newAnnotation(HighlightSeverity.INFORMATION, "File not found").range(keyRange).textAttributes(SCTSyntaxHighlighter.BAD_CHARACTER).newFix(new SCTCreateStoryfileQuickFix(possibleProperties)).registerFix().create();
+            holder.newAnnotation(HighlightSeverity.INFORMATION, "File not found").range(keyRange).textAttributes(SCTSyntaxHighlighter.BAD_CHARACTER).newFix(new SCTCreateStoryfileQuickFix(valuePart)).registerFix().create();
 //            Annotation badProperty = holder.createErrorAnnotation(keyRange, "File not found");
 //            badProperty.setTextAttributes(SCTSyntaxHighlighter.BAD_CHARACTER);
 //            // ** Tutorial step 18.3 - Add a quick fix for the string containing possible properties
-//            badProperty.registerFix(new SCTCreateStoryfileQuickFix(possibleProperties));
+//            badProperty.registerFix(new SCTCreateStoryfileQuickFix(valuePart));
         } else {
             // Found at least one property
             holder.newAnnotation(HighlightSeverity.INFORMATION, "Found").range(keyRange).textAttributes(SCTSyntaxHighlighter.VALUE).create();

@@ -32,31 +32,24 @@ public class PropAnnotator implements Annotator {
         // Define the text ranges (start is inclusive, end is exclusive)
         // "ct:key"
         //  01234567890
-//        TextRange prefixRange = TextRange.from(element.getTextRange().getStartOffset(), CT_PREFIX_STR.length() + 1);
-//        TextRange separatorRange = TextRange.from(prefixRange.getEndOffset(), CT_SEPARATOR_STR.length());
+        //TextRange prefixRange = TextRange.from(element.getTextRange().getStartOffset(), CT_PREFIX_STR.length() + 1);
+        //TextRange separatorRange = TextRange.from(prefixRange.getEndOffset(), CT_SEPARATOR_STR.length());
         TextRange keyRange = null;
-        try {
-            keyRange = new TextRange(element.getTextRange().getStartOffset(), element.getTextRange().getEndOffset() );
-        }catch(Exception e){
-            System.out.println();
-
-        }
+        keyRange = new TextRange(element.getTextRange().getStartOffset(), element.getTextRange().getEndOffset() );
 
         // Get the list of properties from the Project
-        String possibleProperties = value;//.substring(CT_PREFIX_STR.length() + CT_SEPARATOR_STR.length());
+        String valuePart = value;//.substring(CT_PREFIX_STR.length() + CT_SEPARATOR_STR.length());
         Project project = element.getProject();
-        List<CTProperty> properties = PropUtil.findProperties(project, possibleProperties, element.getContainingFile());
+        List<CTProperty> properties = PropUtil.findProperties(project, valuePart, element.getContainingFile());
 
-        // Set the annotations using the text ranges.
-        holder.newAnnotation(HighlightSeverity.INFORMATION, "Found").range(keyRange).textAttributes(DefaultLanguageHighlighterColors.KEYWORD).create();
         if (properties.isEmpty()) {
             // No well-formed property found following the key-separator
-            holder.newAnnotation(HighlightSeverity.WARNING, "File not found").range(keyRange).textAttributes(CTSyntaxHighlighter.BAD_CHARACTER).newFix(new PropCreatePropertyQuickFix(possibleProperties)).registerFix().create();
+            holder.newAnnotation(HighlightSeverity.WARNING, "File not found").range(keyRange).textAttributes(CTSyntaxHighlighter.BAD_CHARACTER).newFix(new PropCreatePropertyQuickFix(valuePart)).registerFix().create();
 
             //Annotation badProperty = holder.createErrorAnnotation(keyRange, "File not found");
             //badProperty.setTextAttributes(PropSyntaxHighlighter.BAD_CHARACTER);
             // ** Tutorial step 18.3 - Add a quick fix for the string containing possible properties
-            //badProperty.registerFix(new PropCreatePropertyQuickFix(possibleProperties));
+            //badProperty.registerFix(new PropCreatePropertyQuickFix(valuePart));
         } else {
             // Found at least one property
             holder.newAnnotation(HighlightSeverity.INFORMATION, "Found").range(keyRange).textAttributes(PropSyntaxHighlighter.VALUE).create();
