@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.fortegroup"
-version = "2.0"
+version = "2.1"
 
 repositories {
     mavenCentral()
@@ -31,7 +31,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("222")
-        untilBuild.set("232.*")
+        untilBuild.set("241.*")
     }
 
     signPlugin {
