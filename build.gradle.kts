@@ -1,11 +1,11 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.0"
-    id("org.jetbrains.intellij") version "1.15.0"
+    id("org.jetbrains.kotlin.jvm") version "1.9.22"
+    id("org.jetbrains.intellij") version "1.17.4"
 }
 
 group = "com.fortegroup"
-version = "2.1"
+version = "2.2"
 
 repositories {
     mavenCentral()
@@ -14,7 +14,7 @@ repositories {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2022.2.5")
+    version.set("2024.3")
     type.set("IC") // Target IDE Platform
     plugins.set(listOf("java"))
 }
@@ -22,16 +22,16 @@ intellij {
 tasks {
     // Set the JVM compatibility versions
     withType<JavaCompile> {
-        sourceCompatibility = "17"
-        targetCompatibility = "17"
+        sourceCompatibility = "21"
+        targetCompatibility = "21"
     }
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
+        kotlinOptions.jvmTarget = "21"
     }
 
     patchPluginXml {
-        sinceBuild.set("222")
-        untilBuild.set("241.*")
+        sinceBuild.set("241")
+        untilBuild.set("243.*")
     }
 
     signPlugin {

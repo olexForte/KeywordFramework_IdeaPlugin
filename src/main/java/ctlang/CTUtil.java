@@ -9,6 +9,7 @@ import com.intellij.psi.impl.java.stubs.index.JavaStubIndexKeys;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexImpl;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
@@ -137,46 +138,68 @@ public class CTUtil {
 
     // Searches the entire project for CT language files with instances of the CT property with the given key
     public static List<PsiLiteralExpression> findCommands(Project project, String key) {
+        List<PsiLiteralExpression> results = new ArrayList<>();
 
-        ArrayList<PsiLiteralExpression> results = new ArrayList<>();
-        Collection<PsiAnnotation> psiAnnotations = StubIndexImpl.getInstance().get(JavaStubIndexKeys.ANNOTATIONS, "KeywordRegexp", project, GlobalSearchScope.projectScope(project));
-        for(PsiAnnotation element : psiAnnotations) {
-            // get PsiLiteralExpression
-            for(PsiElement child :  element.getParent().getParent().getChildren()){
-                if (child instanceof PsiLiteralExpression){
-                    if(child.getText().toLowerCase().trim().contains(key.toLowerCase().trim()))
-                        results.add((PsiLiteralExpression)child);
-                    break;
+        // Use StubIndex.getInstance().getElements() instead of StubIndexImpl
+        Collection<PsiAnnotation> psiAnnotations = StubIndex.getInstance().getElements(
+                JavaStubIndexKeys.ANNOTATIONS,  // The index key
+                "KeywordRegexp",                // The annotation name
+                project,                         // The project
+                GlobalSearchScope.projectScope(project), // Search scope
+                PsiAnnotation.class              // The expected PsiElement type
+        );
+
+        for (PsiAnnotation element : psiAnnotations) {
+            // Ensure element has a parent before accessing
+            PsiElement parent = element.getParent();
+            if (parent != null) {
+                PsiElement grandParent = parent.getParent();
+                if (grandParent != null) {
+                    for (PsiElement child : grandParent.getChildren()) {
+                        if (child instanceof PsiLiteralExpression) {
+                            // Check if the text contains the given key (case-insensitive)
+                            String text = child.getText().toLowerCase().trim();
+                            if (text.contains(key.toLowerCase().trim())) {
+                                results.add((PsiLiteralExpression) child);
+                            }
+                            break; // Exit loop after first match per annotation
+                        }
+                    }
                 }
             }
         }
-//        for(PsiAnnotation element : psiAnnotations) {
-//            // get PsiLiteralExpression
-//            for(PsiElement child :  element.getParent().getParent().getChildren()){
-//                if (child instanceof PsiLiteralExpression){
-//                    if(child.getText().toLowerCase().trim().contains(key.toLowerCase().trim()))
-//                        results.add((PsiLiteralExpression)child);
-//                    break;
-//                }
-//            }
-//        }
         return results;
     }
 
     public static List<PsiLiteralExpression> findCommands(Project project) {
-        ArrayList<PsiLiteralExpression> results = new ArrayList<>();
-        Collection<PsiAnnotation> psiAnnotations = StubIndexImpl.getInstance().get(JavaStubIndexKeys.ANNOTATIONS, "KeywordRegexp", project, GlobalSearchScope.projectScope(project));
-        for(PsiAnnotation element : psiAnnotations) {
-            // get PsiLiteralExpression
-            for(PsiElement child :  element.getParent().getParent().getChildren()){
-                if (child instanceof PsiLiteralExpression){
-                    results.add((PsiLiteralExpression)child);
-                    break;
+        List<PsiLiteralExpression> results = new ArrayList<>();
+
+        Collection<PsiAnnotation> psiAnnotations = StubIndex.getInstance().getElements(
+                JavaStubIndexKeys.ANNOTATIONS,  // The index key
+                "KeywordRegexp",                // The annotation name
+                project,                         // The project
+                GlobalSearchScope.projectScope(project), // Search scope
+                PsiAnnotation.class              // The expected PsiElement type
+        );
+
+        for (PsiAnnotation element : psiAnnotations) {
+            // Traverse parent elements to locate PsiLiteralExpression
+            PsiElement parent = element.getParent();
+            if (parent != null) {
+                PsiElement grandParent = parent.getParent();
+                if (grandParent != null) {
+                    for (PsiElement child : grandParent.getChildren()) {
+                        if (child instanceof PsiLiteralExpression) {
+                            results.add((PsiLiteralExpression) child);
+                            break; // Add only the first match per annotation
+                        }
+                    }
                 }
             }
         }
         return results;
     }
+
 
     public static List<String> findTags(Project project, String valuePart) {
         ArrayList<String> results = new ArrayList<>();
